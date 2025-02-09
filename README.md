@@ -32,4 +32,4 @@ Now we can do what we wanted in the first place: Run `deploy-workloads.sh` to de
 
 Since the embedded minikube installation doesn't use the ingress-dns addon (I didn't want to ask for root permissions just to edit `systemd-resolved` - it seems a bit out of scope) you will have to add temporary entries to your `/etc/hosts` file in order to be able to access the ingresses:
 
-`echo $(minikube ip) podinfo{,-2}.example >> /etc/hosts`
+`echo $(minikube ip) podinfo{,-2}.example | sudo tee -a /etc/hosts`
