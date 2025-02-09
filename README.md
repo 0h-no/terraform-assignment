@@ -28,3 +28,8 @@ Now we can do what we wanted in the first place: Run `deploy-workloads.sh` to de
 * Edit `workloads/minikube/main.tf` to add more charts.
 * For a new local chart run `helm create <CHART-NAME>` in the `charts` directory and in the workload configuration file above refer to it by writing `chart = "../../<CHART-NAME>"`
 
+## Verifying the ingresses
+
+Since the embedded minikube installation doesn't use the ingress-dns addon (I didn't want to ask for root permissions just to edit `systemd-resolved` - it seems a bit out of scope) you will have to add temporary entries to your `/etc/hosts` file in order to be able to access the ingresses:
+
+`echo $(minikube ip) podinfo{,-2}.example >> /etc/hosts`
