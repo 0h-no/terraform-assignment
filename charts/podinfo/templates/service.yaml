@@ -1,0 +1,18 @@
+# https://github.com/stefanprodan/podinfo/blob/master/kustomize/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "podinfo.fullname" . }}
+  labels:
+    {{- include "podinfo.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    {{- range .Values.service.ports }}
+    - port: {{ .port }}
+      targetPort: {{ .port }}
+      protocol: {{ .protocol | default "TCP" }}
+      name: {{ .name }}
+    {{- end }}
+  selector:
+    {{- include "podinfo.selectorLabels" . | nindent 4 }}
